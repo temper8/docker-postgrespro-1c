@@ -17,15 +17,15 @@ RUN apt-get -qq update \
 RUN localedef --inputfile ru_RU --force --charmap UTF-8 --alias-file /usr/share/locale/locale.alias ru_RU.UTF-8
 ENV LANG ru_RU.utf8
 
-ENV SERVER_VERSION 9.4
+ENV SERVER_VERSION 9.6
 ENV PATH /usr/lib/postgresql/$SERVER_VERSION/bin:$PATH
 ENV PGDATA /data
-RUN echo deb http://1c.postgrespro.ru/deb/ xenial main > /etc/apt/sources.list.d/postgrespro-1c.list \
-  && wget --quiet -O- http://1c.postgrespro.ru/keys/GPG-KEY-POSTGRESPRO-1C | apt-key add - \
+RUN echo deb http://repo.postgrespro.ru/pgpro-9.6/ubuntu/ xenial main > /etc/apt/sources.list.d/postgrespro-1c.list \
+  && wget --quiet -O- http://repo.postgrespro.ru/pgpro-9.6/keys/GPG-KEY-POSTGRESPRO | apt-key add - \
   && apt-get -qq update \
-  && apt-get -qq install --yes --no-install-recommends postgresql-common-pro-1c \
+  && apt-get -qq install --yes postgrespro-common \
   && sed -ri 's/#(create_main_cluster) .*$/\1 = false/' /etc/postgresql-common/createcluster.conf \
-  && apt-get -qq install --yes --no-install-recommends postgresql-pro-1c-$SERVER_VERSION \
+  && apt-get -qq install --yes postgrespro-$SERVER_VERSION \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
