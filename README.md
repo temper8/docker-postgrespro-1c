@@ -4,11 +4,15 @@
 
 docker-postgrespro-1c -- это Docker-контейнер PostgreSQL для использования с сервером 1С:Предприятия (который, в свою очередь, тоже может работать в [контейнере Docker](https://github.com/alexanderfefelov/docker-1c-server)). В контейнере используется сборка Postgres Professional, которая содержит патчи, разработанные компанией 1С.
 
+## Updatу (29.01.2021)
+ 
+  Исправил ссылки на репы PostgreSQL, что бы работало
+
 ## Как это установить?
 
 Для установки и начального запуска выполните команды:
 
-    git clone https://github.com/alexanderfefelov/docker-postgrespro-1c.git
+    git clone https://github.com/temper8/docker-postgrespro-1c.git
     cd docker-postgrespro-1c
     ./build.sh
     ./run.sh
@@ -39,7 +43,7 @@ docker-postgrespro-1c -- это Docker-контейнер PostgreSQL для ис
 
 Удалите образ:
 
-    docker rmi alexanderfefelov/postgrespro-1c
+    docker rmi tmp8/postgrespro-1c
 
 :fire: Удалите данные:
 
