@@ -1,5 +1,5 @@
-FROM ubuntu:xenial
-
+FROM ubuntu:bionic
+ 
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN groupadd postgres --gid=999 \
@@ -7,7 +7,7 @@ RUN groupadd postgres --gid=999 \
 
 ENV GOSU_VERSION 1.7
 RUN apt-get -qq update \
-  && apt-get -qq install --yes --no-install-recommends ca-certificates wget locales \
+  && apt-get -qq install --yes --no-install-recommends ca-certificates wget locales gnupg2 \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && wget --quiet -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
@@ -20,7 +20,7 @@ ENV LANG ru_RU.utf8
 ENV SERVER_VERSION 9.6
 ENV PATH /usr/lib/postgresql/$SERVER_VERSION/bin:$PATH
 ENV PGDATA /data
-RUN echo deb http://repo.postgrespro.ru/pgpro-9.6/ubuntu/ xenial main > /etc/apt/sources.list.d/postgrespro-1c.list \
+RUN echo deb http://repo.postgrespro.ru/pgpro-9.6/ubuntu/ bionic main > /etc/apt/sources.list.d/postgrespro-1c.list \
   && wget --quiet -O- http://repo.postgrespro.ru/pgpro-9.6/keys/GPG-KEY-POSTGRESPRO | apt-key add - \
   && apt-get -qq update \
   && apt-get -qq install --yes postgrespro-common \
